@@ -1,23 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React, { useState } from 'react'
+import { LoginSignup } from './Components/LoginSignup/LoginSignup'
+import Homepage from './Components/Homepage/Homepage'
 function App() {
+  // Step 1: Create a state variable to track if the user is logged in.
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Create a function that logs the user in.
+  const handleLoginSignup = () => {
+    setIsLoggedIn(true); // Set isLoggedIn to true, showing the Home component.
+  };
+
+  // Conditionally render LoginSignup or Home component based on isLoggedIn.
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLoggedIn ? (
+        <Homepage /> // Render the Home component if logged in.
+      ) : (
+        <LoginSignup onLoginSignup={handleLoginSignup} /> // Show LoginSignup if not logged in.
+      )}
     </div>
   );
 }
